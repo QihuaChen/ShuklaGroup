@@ -1,0 +1,17 @@
+Minimization
+&cntrl
+ imin=1,
+ maxcyc=20000,
+ ncyc=1000,
+ ntmin=2,
+ cut=10.0,
+ drms=10.0,
+ ntb=1,
+ ntc=2,
+ ntf=2,
+ ntp=0,
+ ntpr=100,
+ ntwr=100,
+ restraintmask='@CA,C,O,N',
+ restraint_wt=5.0,
+/

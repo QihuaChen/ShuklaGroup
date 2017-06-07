@@ -1,0 +1,9 @@
+#$ -S /bin/bash    # Set shell to run job
+#$ -q all.q        # Choose queue to run job in
+#$ -cwd            # Run job from my current working directory
+
+export PATH="/home/amoffet2/amber14_serial/bin:$PATH"
+export
+
+cd /home/qchen39/
+pmemd -O -i min.in -o 5CBK.out -p 5CBK.prmtop -c 5CBK.crd -r 5CBK_min.rst

@@ -1,0 +1,21 @@
+### Use this script for GPU jobs
+### Lines starting with "#$" are options for the SGE scheduling system
+#$ -S /bin/bash    # Set shell to run job
+#$ -q all.q        # Choose queue to run job in
+#$ -pe cuda 1      # Request one processor from the CUDA parallel env.
+#$ -l slots_gpu=1  # Request one GPU per CPU requested
+#$ -cwd            # Run job from my current working directory
+
+
+module load cuda
+nvidia-smi
+
+export PATH="/home/amoffet2/amber14/bin:$PATH"
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64
+export CUDA_HOME=/usr/local/cuda
+
+export CUDA_VISIBLE_DEVICES=$(cat $TMPDIR/cuda_device)
+module load cuda/cuda-7.0
+
+cd /home/qchen39/Apo/
+pmemd -O -i NPT5.in -o 5CBK_npt.out.5 -p 5CBK.prmtop -c 5CBK_npt4.rst -r 5CBK_npt5.rst -ref 5CBK_npt4.rst

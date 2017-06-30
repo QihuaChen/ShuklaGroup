@@ -1,0 +1,19 @@
+### Use this script for GPU jobs
+### Lines starting with “#$” are options for the SGE scheduling system
+#$ -S /bin/bash    # Set shell to run job
+#$ -q all.q        # Choose queue to run job in
+#$ -pe cuda 1      # Request one processor from the CUDA parallel env.
+#$ -l slots_gpu=1  # Request one GPU per CPU requested
+#$ -cwd            # Run job from my current working directory
+
+module load cuda
+nvidia-smi
+export AMBERHOME=“/home/amoffet2/amber14/”
+export PATH=“/home/amoffet2/amber14/bin:$PATH”
+export LD_LIBRARY_PATH=/opt/gridengine/lib/linux-x64:/opt/openmpi/lib:/opt/python/lib:/usr/local/cuda/lib64:/home/amoffet2/amber14/lib:/usr/local/cuda/lib64
+export CUDA_HOME=/usr/local/cuda
+
+export CUDA_VISIBLE_DEVICES=$(cat $TMPDIR/cuda_device)
+
+cd /home/qchen39/model/KAI2c-copy
+mpirun -np 1 pmemd.cuda.MPI -O -i NPT.in -o newShc1.B99990023-npt.out -p newShc1.B99990023.prmtop -c newShc1.B99990023-nvt.rst -r newShc1.B99990023-npt.rst -ref newShc1.B99990023-nvt.rst -x newShc1.B99990023.md

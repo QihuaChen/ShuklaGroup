@@ -1,0 +1,14 @@
+MD-NPT
+Stage 1 heating 0 to 300K
+&cntrl
+imin=0, irest=1, ntx=5,
+nstlim=500000, dt=0.002,
+ntc=2, ntf=2,
+ntt=1, tautp=1.0,
+tempi=0.0, temp0=300.0,
+ntpr=10000, ntwx=20000,
+ntb=2, ntr=1, ntp=1, pres0=1.0,
+cut=10,
+restraintmask='@CA,C,O,N',
+restraint_wt=10.0
+/
